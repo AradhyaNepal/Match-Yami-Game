@@ -1,4 +1,4 @@
-package com.a2.pickyami.gameplay.model;
+package com.a2.pickyami.practice.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

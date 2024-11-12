@@ -1,6 +1,4 @@
-package com.a2.pickyami.gameplay;
-
-import lombok.*;
+package com.a2.pickyami.practice;
 
 
 public enum MessageType {

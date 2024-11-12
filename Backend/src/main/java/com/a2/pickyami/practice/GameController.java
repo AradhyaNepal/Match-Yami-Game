@@ -1,7 +1,7 @@
-package com.a2.pickyami.gameplay;
+package com.a2.pickyami.practice;
 
-import com.a2.pickyami.gameplay.model.GameStartModel;
-import com.a2.pickyami.gameplay.model.GameStartRequest;
+import com.a2.pickyami.practice.model.GameStartModel;
+import com.a2.pickyami.practice.model.GameStartRequest;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;

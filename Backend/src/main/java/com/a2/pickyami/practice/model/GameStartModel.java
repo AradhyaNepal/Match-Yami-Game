@@ -1,6 +1,6 @@
-package com.a2.pickyami.gameplay.model;
+package com.a2.pickyami.practice.model;
 
-import com.a2.pickyami.gameplay.MessageType;
+import com.a2.pickyami.practice.MessageType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

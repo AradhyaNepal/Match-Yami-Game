@@ -28,3 +28,8 @@ Less overhead once connected
 
 ws
 wss-> Secure
+
+
+Researched From:
+https://www.youtube.com/watch?v=TywlS9iAZCM
+https://www.youtube.com/watch?v=n6ZqOwreFTA

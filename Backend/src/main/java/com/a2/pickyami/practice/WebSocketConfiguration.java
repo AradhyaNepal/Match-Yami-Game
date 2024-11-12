@@ -1,4 +1,4 @@
-package com.a2.pickyami.gameplay;
+package com.a2.pickyami.practice;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

@@ -1,6 +1,6 @@
-package com.a2.pickyami.gameplay;
+package com.a2.pickyami.practice;
 
-import com.a2.pickyami.gameplay.model.GameStartModel;
+import com.a2.pickyami.practice.model.GameStartModel;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
