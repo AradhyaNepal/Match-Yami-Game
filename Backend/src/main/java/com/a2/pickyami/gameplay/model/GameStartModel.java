@@ -9,4 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GameStartModel {
      private String message;
+     private String sender;
 }
