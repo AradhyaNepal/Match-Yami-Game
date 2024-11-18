@@ -19,9 +19,19 @@ May do lazy initialization
 Easy way to do quick testing
 rsc --debug --request --data {"message";""} --route request-response --stacktrace tcpip:url
 
-rsc --debug --fnf --data {"message";""} --route request-response --stacktrace tcpip:url
-rsc --debug --stream --data {"message";""} --route request-response --stacktrace tcpip:url
+
+
+@SpringBootTest
+
+
+Stream Out Stream In
+-------------------
 
 
 
+Messaging exchan ge:
+Single In Single out: Request Response
+MultipleIn/SingleIn and MultipleBack: Streaming
+Multiple Value concurrent with multiple value receive back: Channel
+Single Value in but no response: Fire and Forgot
 
