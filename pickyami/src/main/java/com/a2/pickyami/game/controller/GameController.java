@@ -3,7 +3,7 @@ package com.a2.pickyami.game.controller;
 
 import com.a2.pickyami.game.model.GameStartModel;
 import com.a2.pickyami.game.model.GameStartRequest;
-import com.a2.pickyami.game.model.MessageType;
+import com.a2.pickyami.game.MessageType;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;

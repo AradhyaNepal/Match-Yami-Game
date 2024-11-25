@@ -1,6 +1,6 @@
-package com.a2.pickyami.game;
+package com.a2.pickyami.game.entity;
 
-import com.a2.pickyami.game.model.GameStatus;
+import com.a2.pickyami.game.GameStatus;
 
 import java.time.LocalDateTime;
 import java.util.List;

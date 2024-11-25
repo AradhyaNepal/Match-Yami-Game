@@ -1,4 +1,4 @@
-package com.a2.pickyami.game.model;
+package com.a2.pickyami.game.enums;
 
 
 public enum MessageType {

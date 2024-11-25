@@ -2,7 +2,7 @@ package com.a2.pickyami.game.config;
 
 
 import com.a2.pickyami.game.model.GameStartModel;
-import com.a2.pickyami.game.model.MessageType;
+import com.a2.pickyami.game.MessageType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
