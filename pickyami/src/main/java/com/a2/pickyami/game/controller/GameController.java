@@ -1,23 +1,25 @@
 package com.a2.pickyami.game.controller;
 
+import com.a2.pickyami.game.config.JwtService;
 import com.a2.pickyami.game.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequiredArgsConstructor
 public class GameController {
 
     final private GameService service;
-    private final SimpMessagingTemplate messagingTemplate;
+    final private SimpMessagingTemplate messagingTemplate;
+    final private JwtService jwtService;
 
-    @RequestMapping("/start-or-resume")
+    @PostMapping("/start-or-resume")
     public void startOrResultGame(@RequestHeader("Authorization") String token) throws Exception {
-        String userId = extractUserIdFromToken(token);
-        var game = service.startOrResumeGame(userId);
+
+        var game = service.startOrResumeGame(jwtService.extractUID(token));
         for (var e : game.getPlayersList()) {
             messagingTemplate.convertAndSendToUser(
                     e.getUid(),
@@ -28,7 +30,5 @@ public class GameController {
 
     }
 
-    private String extractUserIdFromToken(String token) {
-        return "";
-    }
+
 }

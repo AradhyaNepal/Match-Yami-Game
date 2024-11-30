@@ -3,6 +3,7 @@ package com.a2.pickyami.game.entity;
 import com.a2.pickyami.game.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,6 +15,7 @@ import java.util.UUID;
 
 @Entity
 @Data
+@Builder
 public class Players implements UserDetails {
 
     @Id
@@ -37,8 +39,6 @@ public class Players implements UserDetails {
     @NotNull
     private String password;
 
-
-    private String phone;
 
     @Enumerated(EnumType.STRING)
     private Role role;
