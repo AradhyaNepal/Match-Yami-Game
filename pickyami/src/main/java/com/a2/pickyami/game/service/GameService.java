@@ -4,19 +4,22 @@ import com.a2.pickyami.game.entity.GameEntity;
 import com.a2.pickyami.game.entity.User;
 import com.a2.pickyami.game.enums.GameStatus;
 import com.a2.pickyami.game.model.GameStartModel;
-import com.a2.pickyami.game.model.GameStartRequest;
+import com.a2.pickyami.game.repository.GamePiecesRepository;
 import com.a2.pickyami.game.repository.GameRepository;
 import com.a2.pickyami.game.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class GameService {
     private final GameRepository gameRepository;
+    private final GamePiecesRepository gamePiecesRepository;
     private final UserRepository userRepository;
 
 
@@ -44,6 +47,11 @@ public class GameService {
             }
             if (game.getPlayers().size() == 4) {
                 game.setGameStatus(GameStatus.onGoing);
+                var halfPieces = gamePiecesRepository.getFirst15Pieces();
+                var pieces = new ArrayList<>(halfPieces);
+                pieces.addAll(halfPieces);
+                Collections.shuffle(pieces);
+                game.setGamePieces(pieces);
             }
             gameRepository.save(game);
             return gameToResponse(game);

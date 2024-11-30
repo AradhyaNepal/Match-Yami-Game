@@ -27,6 +27,8 @@ public class GameEntity {
     private LocalDateTime gameStartedAt;
     private LocalDateTime gameEndedAt;
     private String remark;
+    @ManyToMany(mappedBy = "pieces", cascade = CascadeType.ALL)
+    private List<GamePieces> gamePieces;
 
     @PrePersist
     public void generateGameUid() {
