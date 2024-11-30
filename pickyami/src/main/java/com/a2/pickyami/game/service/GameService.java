@@ -20,9 +20,9 @@ public class GameService {
     private final UserRepository userRepository;
 
 
-    public GameStartModel startGame(GameStartRequest request) throws Exception {
+    public GameStartModel startOrResumeGame(String uid) throws Exception {
         var lastRow = gameRepository.findLastRow();
-        var userOptional = userRepository.findByUId(request.getUserUid());
+        var userOptional = userRepository.findByUId(uid);
         if (userOptional.isPresent()) {
             var user = userOptional.get();
             GameEntity game;

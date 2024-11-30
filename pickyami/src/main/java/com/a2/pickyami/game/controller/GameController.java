@@ -19,15 +19,18 @@ public class GameController {
     final private GameService service;
     private final SimpMessagingTemplate messagingTemplate;
 
-    @RequestMapping("/start")
-    public void startGame(@RequestHeader("Authorization") String token, @RequestBody @Valid GameStartRequest request) {
+    @RequestMapping("/start-or-resume")
+    public void startOrResultGame(@RequestHeader("Authorization") String token) throws Exception {
         String userId = extractUserIdFromToken(token);
-        var game = service.startGame(request);
-        messagingTemplate.convertAndSendToUser(
-                userId,
-                "/queue/start",
-                game
-        );
+        var game = service.startOrResumeGame(userId);
+        for (var e : game.getPlayersList()) {
+            messagingTemplate.convertAndSendToUser(
+                    e.getUid(),
+                    "/queue/start",
+                    game
+            );
+        }
+
     }
 
     private String extractUserIdFromToken(String token) {
