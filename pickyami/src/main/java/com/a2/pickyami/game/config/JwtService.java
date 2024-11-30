@@ -17,7 +17,6 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private static final String roleKey = "ROLE";
     private static final String SECRET_KEY = "58d382612c47f7011d8d852e630395c8bd835f724ae8c1681aaabbcd27ca0fac";
 
     public String extractUID(String token) {
@@ -25,11 +24,12 @@ public class JwtService {
     }
 
     public JWTExtracted extractFromToken(String token) {
-        var value=extractAllClaims(token);
+        var value = extractAllClaims(token);
         return JWTExtracted.builder()
                 .uid(value.get("sub").toString())
-                .role(Role.valueOf(value.get("role").toString()))
+                .role(Role.user)
                 .build();
+        //Role.valueOf(value.get(roleKey).toString())
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -46,7 +46,7 @@ public class JwtService {
         return Jwts.builder().claims(extraClaims)
                 .subject(userDetails.getUsername())
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
                 .signWith(getKey(), Jwts.SIG.HS256)
                 .compact();
     }
@@ -67,6 +67,8 @@ public class JwtService {
 
 
     private Claims extractAllClaims(String token) {
+        token=token.replaceAll("Bearer ","");
+        System.out.println("Bello:"+token);
         return Jwts.parser()
                 .verifyWith(getKey())
                 .build()

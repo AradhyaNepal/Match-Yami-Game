@@ -63,13 +63,14 @@ public class GameService {
     private static GameStartModel gameToResponse(Game game) {
         return GameStartModel
                 .builder()
+                .gameUid(game.getGameUid())
                 .status(game.getGameStatus())
                 .playersList(
                         game.getPlayers()
                                 .stream()
                                 .map(e -> GameStartModel.GamePlayers
                                         .builder().profile(e.getProfile())
-                                        .name(e.getUsername())
+                                        .name(e.getFullName())
                                         .uid(e.getUid())
                                         .build()
                                 ).toList()

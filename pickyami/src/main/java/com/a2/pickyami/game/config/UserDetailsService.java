@@ -5,7 +5,10 @@ import com.a2.pickyami.game.repository.PlayerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+
+@Service
 @AllArgsConstructor
 class MyUserDetailsService implements UserDetailsService {
 

@@ -3,8 +3,10 @@ package com.a2.pickyami.game.entity;
 import com.a2.pickyami.game.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +18,8 @@ import java.util.UUID;
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Players implements UserDetails {
 
     @Id
@@ -49,7 +53,10 @@ public class Players implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));//TOdo: Verify
+        if (role == null) {
+            return List.of(new SimpleGrantedAuthority("ROLE_"+Role.user));
+        }
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

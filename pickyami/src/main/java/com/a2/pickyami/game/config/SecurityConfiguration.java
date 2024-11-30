@@ -2,6 +2,7 @@ package com.a2.pickyami.game.config;
 //eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiZmEzZDNmNi1kZDM4LTRiMjktOWQyNC03YTUzZjU4YWY1YTUiLCJpYXQiOjE3MzI5NjQwNjIsImV4cCI6MTczMjk2NTUwMn0.IpRggJAgrKUvjh0DM14gmhr1ROQZaD847SwIltSs14U
 
 
+import com.a2.pickyami.game.enums.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,12 +29,13 @@ public class SecurityConfiguration {
                         auth -> auth
                                 .requestMatchers("/v3/api-docs/**",
                                         "/swagger-ui/**",
-                                        "/swagger-ui.html","/api/v1/auth/**").permitAll()
-                                .anyRequest().authenticated()
+                                        "/swagger-ui.html", "/api/v1/auth/**").permitAll()
+                                .anyRequest().hasRole(Role.user.toString())
                 )
                 .sessionManagement(
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(
                         jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

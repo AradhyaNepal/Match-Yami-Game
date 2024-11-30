@@ -1,6 +1,7 @@
 package com.a2.pickyami.game.controller;
 
 import com.a2.pickyami.game.config.JwtService;
+import com.a2.pickyami.game.model.GameStartModel;
 import com.a2.pickyami.game.service.GameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -17,7 +18,7 @@ public class GameController {
     final private JwtService jwtService;
 
     @PostMapping("/start-or-resume")
-    public void startOrResultGame(@RequestHeader("Authorization") String token) throws Exception {
+    public GameStartModel startOrResultGame(@RequestHeader("Authorization") String token) throws Exception {
 
         var game = service.startOrResumeGame(jwtService.extractUID(token));
         for (var e : game.getPlayersList()) {
@@ -27,6 +28,7 @@ public class GameController {
                     game
             );
         }
+        return game;
 
     }
 

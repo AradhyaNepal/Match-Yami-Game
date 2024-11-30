@@ -12,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class GameStartModel {
+    private  String gameUid;
     private List<GamePlayers> playersList;
     private GameStatus status;
 
