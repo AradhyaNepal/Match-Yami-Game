@@ -1,4 +1,5 @@
 package com.a2.pickyami.game.config;
+//eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJiZmEzZDNmNi1kZDM4LTRiMjktOWQyNC03YTUzZjU4YWY1YTUiLCJpYXQiOjE3MzI5NjQwNjIsImV4cCI6MTczMjk2NTUwMn0.IpRggJAgrKUvjh0DM14gmhr1ROQZaD847SwIltSs14U
 
 
 import lombok.RequiredArgsConstructor;

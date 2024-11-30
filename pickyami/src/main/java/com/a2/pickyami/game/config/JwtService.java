@@ -1,5 +1,7 @@
 package com.a2.pickyami.game.config;
 
+import com.a2.pickyami.game.enums.Role;
+import com.a2.pickyami.game.model.JWTExtracted;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -15,10 +17,19 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
+    private static final String roleKey = "ROLE";
     private static final String SECRET_KEY = "58d382612c47f7011d8d852e630395c8bd835f724ae8c1681aaabbcd27ca0fac";
 
     public String extractUID(String token) {
         return extractClaim(token, Claims::getSubject);
+    }
+
+    public JWTExtracted extractFromToken(String token) {
+        var value=extractAllClaims(token);
+        return JWTExtracted.builder()
+                .uid(value.get("sub").toString())
+                .role(Role.valueOf(value.get("role").toString()))
+                .build();
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -41,8 +52,8 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails details) {
-        var uid = extractUID(token);
-        return uid.equals(details.getUsername()) && !isTokenExpired(token);
+        var extracted = extractFromToken(token);
+        return extracted.getUid().equals(details.getUsername()) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
