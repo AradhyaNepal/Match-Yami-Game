@@ -1,4 +1,4 @@
-package com.a2.pickyami.game.entity;
+package com.a2.pickyami.game.enums;
 
 public enum Role {
     user,

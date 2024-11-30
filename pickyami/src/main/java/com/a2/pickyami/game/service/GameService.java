@@ -1,12 +1,12 @@
 package com.a2.pickyami.game.service;
 
-import com.a2.pickyami.game.entity.GameEntity;
-import com.a2.pickyami.game.entity.User;
+import com.a2.pickyami.game.entity.Game;
+import com.a2.pickyami.game.entity.Players;
 import com.a2.pickyami.game.enums.GameStatus;
 import com.a2.pickyami.game.model.GameStartModel;
-import com.a2.pickyami.game.repository.GamePiecesRepository;
+import com.a2.pickyami.game.repository.PiecesRepository;
 import com.a2.pickyami.game.repository.GameRepository;
-import com.a2.pickyami.game.repository.UserRepository;
+import com.a2.pickyami.game.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +19,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GameService {
     private final GameRepository gameRepository;
-    private final GamePiecesRepository gamePiecesRepository;
-    private final UserRepository userRepository;
+    private final PiecesRepository gamePiecesRepository;
+    private final PlayerRepository userRepository;
 
 
     public GameStartModel startOrResumeGame(String uid) throws Exception {
@@ -32,7 +32,7 @@ public class GameService {
         var lastRow = gameRepository.findLastRow();
         if (userOptional.isPresent()) {
             var user = userOptional.get();
-            GameEntity game;
+            Game game;
             if (lastRow.isEmpty()) {
                 game = createNewGame(user);
             } else {
@@ -60,7 +60,7 @@ public class GameService {
         }
     }
 
-    private static GameStartModel gameToResponse(GameEntity game) {
+    private static GameStartModel gameToResponse(Game game) {
         return GameStartModel
                 .builder()
                 .status(game.getGameStatus())
@@ -76,8 +76,8 @@ public class GameService {
                 ).build();
     }
 
-    private GameEntity createNewGame(User user) {
-        return GameEntity.builder()
+    private Game createNewGame(Players user) {
+        return Game.builder()
                 .gameStatus(GameStatus.onBoarding)
                 .gameStartedAt(LocalDateTime.now())
                 .players(List.of(user))

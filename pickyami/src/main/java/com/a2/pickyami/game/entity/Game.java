@@ -12,23 +12,36 @@ import java.util.UUID;
 
 @Builder
 @Data
-public class GameEntity {
+@Entity
+public class Game {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true, nullable = false, updatable = false)
     private String gameUid;
+    @Enumerated(EnumType.STRING)
     private GameStatus gameStatus;
-    @OneToMany(mappedBy = "winner", cascade = CascadeType.ALL)
-    private User winner;
-    @ManyToMany(mappedBy = "players", cascade = CascadeType.ALL)
-    private List<User> players;
+    @ManyToOne
+    @JoinColumn(name = "winner_id")
+    private Players winner;
+    @ManyToMany
+    @JoinTable(
+            name = "game_players",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<Players> players;
     private LocalDateTime createdAt;
     private LocalDateTime gameStartedAt;
     private LocalDateTime gameEndedAt;
     private String remark;
-    @ManyToMany(mappedBy = "pieces", cascade = CascadeType.ALL)
-    private List<GamePieces> gamePieces;
+    @ManyToMany
+    @JoinTable(
+            name = "game_pieces",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "pieces_id")
+    )
+    private List<Pieces> gamePieces;
 
     @PrePersist
     public void generateGameUid() {

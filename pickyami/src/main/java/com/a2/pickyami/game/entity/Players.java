@@ -1,5 +1,6 @@
 package com.a2.pickyami.game.entity;
 
+import com.a2.pickyami.game.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -13,8 +14,7 @@ import java.util.UUID;
 
 @Entity
 @Data
-@Table(name = "User")
-public class User implements UserDetails {
+public class Players implements UserDetails {
 
     @Id
     @GeneratedValue

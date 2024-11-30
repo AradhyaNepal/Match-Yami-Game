@@ -1,6 +1,6 @@
 package com.a2.pickyami.game.config;
 
-import com.a2.pickyami.game.repository.UserRepository;
+import com.a2.pickyami.game.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
-    private final UserRepository repo;
+    private final PlayerRepository repo;
 
 
     @Bean

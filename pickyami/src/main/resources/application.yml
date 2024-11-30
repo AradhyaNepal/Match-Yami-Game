@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: pickyami
+  resources:
+    static-locations:
+      - classpath:/static/
+      - file:./uploads/
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/pickyami
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+    platform: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update

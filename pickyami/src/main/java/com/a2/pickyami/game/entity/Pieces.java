@@ -1,10 +1,13 @@
 package com.a2.pickyami.game.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Data;
 
-public class GamePieces {
+@Entity
+@Data
+@Builder
+public class Pieces {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
