@@ -21,8 +21,12 @@ public class GameService {
 
 
     public GameStartModel startOrResumeGame(String uid) throws Exception {
-        var lastRow = gameRepository.findLastRow();
         var userOptional = userRepository.findByUId(uid);
+        var exitingGame = gameRepository.existingGame(uid);
+        if (exitingGame.isPresent()) {
+            return gameToResponse(exitingGame.get());
+        }
+        var lastRow = gameRepository.findLastRow();
         if (userOptional.isPresent()) {
             var user = userOptional.get();
             GameEntity game;
@@ -42,22 +46,26 @@ public class GameService {
                 game.setGameStatus(GameStatus.onGoing);
             }
             gameRepository.save(game);
-            return GameStartModel
-                    .builder()
-                    .status(game.getGameStatus())
-                    .playersList(
-                            game.getPlayers()
-                                    .stream()
-                                    .map(e -> GameStartModel.GamePlayers
-                                            .builder().profile(e.getProfile())
-                                            .name(e.getUsername())
-                                            .uid(e.getUid())
-                                            .build()
-                                    ).toList()
-                    ).build();
+            return gameToResponse(game);
         } else {
             throw new Exception();
         }
+    }
+
+    private static GameStartModel gameToResponse(GameEntity game) {
+        return GameStartModel
+                .builder()
+                .status(game.getGameStatus())
+                .playersList(
+                        game.getPlayers()
+                                .stream()
+                                .map(e -> GameStartModel.GamePlayers
+                                        .builder().profile(e.getProfile())
+                                        .name(e.getUsername())
+                                        .uid(e.getUid())
+                                        .build()
+                                ).toList()
+                ).build();
     }
 
     private GameEntity createNewGame(User user) {

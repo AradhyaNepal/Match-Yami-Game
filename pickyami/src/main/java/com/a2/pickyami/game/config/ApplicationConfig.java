@@ -1,6 +1,6 @@
 package com.a2.pickyami.game.config;
 
-import com.a2.oauth_practice.repository.UserRepository;
+import com.a2.pickyami.game.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class ApplicationConfig {
     @Bean
     public UserDetailsService getUserDetailsService() {
         return username -> repo.findByEmail(username).orElseThrow(
-                () -> new UsernameNotFoundException("No username available in our system")
+                () -> new UsernameNotFoundException("No email available in our system")
         );
     }
 

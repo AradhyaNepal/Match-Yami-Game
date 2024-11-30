@@ -1,5 +1,6 @@
 package com.a2.pickyami.game.config;
 
+import com.a2.pickyami.game.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;

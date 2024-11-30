@@ -14,4 +14,6 @@ public interface GameRepository extends JpaRepository<GameEntity, Integer> {
 
 
     Optional<GameEntity> findLastRow();
+
+    Optional<GameEntity> existingGame(String userUid);
 }

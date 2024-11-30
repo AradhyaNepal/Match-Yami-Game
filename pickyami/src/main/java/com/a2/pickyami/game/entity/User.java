@@ -21,14 +21,18 @@ public class User implements UserDetails {
     private int id;
 
     @NotNull
+    private String fullName;
+
+    @NotNull
     private String email;
 
 
     private String profile;
 
 
-    @NotNull
-    private String username;
+    public @NotNull String getUsername() {
+        return uid;
+    }
 
     @NotNull
     private String password;
@@ -67,6 +71,7 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 
     @PrePersist
     public void generateGameUid() {
