@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Data
@@ -22,6 +23,10 @@ public class User implements UserDetails {
     @NotNull
     private String email;
 
+
+    private String profile;
+
+
     @NotNull
     private String username;
 
@@ -33,6 +38,9 @@ public class User implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(unique = true, nullable = false, updatable = false)
+    private String uid;
 
 
     @Override
@@ -58,5 +66,12 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @PrePersist
+    public void generateGameUid() {
+        if (uid == null) {
+            uid = UUID.randomUUID().toString();
+        }
     }
 }
