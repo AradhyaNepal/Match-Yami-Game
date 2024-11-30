@@ -6,5 +6,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class GameStartRequest {
-    private String name;
+    private String userUid;
 }
