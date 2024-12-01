@@ -9,6 +9,7 @@ import com.a2.pickyami.game.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +19,7 @@ public class AuthService {
     final private AuthenticationManager authManager;
     final private JwtService jwtService;
     final private PlayerRepository playerRepository;
+    final private PasswordEncoder encoder;
 
 
     public String verify(LoginRequest request) {
@@ -35,7 +37,7 @@ public class AuthService {
                 Players.builder().email(
                                 request.getEmail())
                         .fullName(request.getFullName())
-                        .password(request.getPassword())
+                        .password(encoder.encode(request.getPassword()))
                         .build());
         return jwtService.generateToken(user);
     }

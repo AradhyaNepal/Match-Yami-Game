@@ -56,27 +56,27 @@ public class Players implements UserDetails {
         if (role == null) {
             return List.of(new SimpleGrantedAuthority("ROLE_"+Role.user));
         }
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority("ROLE_"+role.name()));
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true; // Account is not expired
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true; // Account is not locked
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true; // Credentials are not expired
     }
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return true; // Account is enabled
     }
 
 
