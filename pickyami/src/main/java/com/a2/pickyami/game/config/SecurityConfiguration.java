@@ -4,6 +4,7 @@ package com.a2.pickyami.game.config;
 
 import com.a2.pickyami.game.enums.Role;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -27,9 +28,14 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
+
                                 .requestMatchers("/v3/api-docs/**",
                                         "/swagger-ui/**",
-                                        "/swagger-ui.html", "/api/v1/auth/**").permitAll()
+                                        "/swagger-ui.html",
+                                        "/api/v1/auth/**",
+                                        "/assets/**").permitAll()
+
+
                                 .anyRequest().hasRole(Role.user.toString())
                 )
                 .sessionManagement(
