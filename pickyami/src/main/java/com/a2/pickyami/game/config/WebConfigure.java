@@ -8,11 +8,12 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebConfigure implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(gameHandler(),"/game").setAllowedOrigins("*");
+        registry.addHandler(gameHandler(),"/game").setAllowedOrigins("*").setHandshakeHandler();
+
     }
 
     @Bean
     public WebSocketHandler gameHandler(){
-        return  new CustomHandshakeHandler() ;
+        return  new CustonWebSocketHandler() ;
     }
 }

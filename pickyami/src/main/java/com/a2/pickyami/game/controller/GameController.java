@@ -12,6 +12,7 @@ import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.socket.WebSocketHandler;
 
 import java.util.Map;
 
@@ -20,7 +21,7 @@ import java.util.Map;
 public class GameController {
 
     final private GameService service;
-    final private SimpMessagingTemplate messagingTemplate;
+//    final private WebSocketHandler messagingTemplate;
     final private JwtService jwtService;
 
     @PostMapping("/start-or-resume")
@@ -28,11 +29,11 @@ public class GameController {
 
         var game = service.startOrResumeGame(jwtService.extractUID(token));
         for (var e : game.getPlayersList()) {
-            messagingTemplate.convertAndSendToUser(
-                    e.getUid(),
-                    "/queue/start",
-                    game
-            );
+//            messagingTemplate.convertAndSendToUser(
+//                    e.getUid(),
+//                    "/queue/start",
+//                    game
+//            );
         }
         return game;
 
