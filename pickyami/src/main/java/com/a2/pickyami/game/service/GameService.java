@@ -38,14 +38,14 @@ public class GameService {
             } else {
                 var entity = lastRow.get();
                 var players = entity.getPlayers();
-                if (players.size() < 4) {
+                if (players.size() < 2) {
                     players.add(user);
                     game = entity;
                 } else {
                     game = createNewGame(user);
                 }
             }
-            if (game.getPlayers().size() == 4) {
+            if (game.getPlayers().size() == 2) {
                 game.setGameStatus(GameStatus.onGoing);
                 var halfPieces = gamePiecesRepository.getFirst15Pieces();
                 var pieces = new ArrayList<>(halfPieces);

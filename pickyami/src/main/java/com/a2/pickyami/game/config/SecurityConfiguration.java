@@ -38,7 +38,7 @@ public class SecurityConfiguration {
                                         "/assets/**").permitAll()
 
 
-                                .anyRequest().hasRole(Role.user.toString())
+                                .anyRequest().permitAll()//.hasRole(Role.user.toString())
                 )
                 .sessionManagement(
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
